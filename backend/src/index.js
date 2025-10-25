@@ -82,4 +82,15 @@ app.post("/verify", (req, res) => {
 
 // Serverstart
 const PORT = process.env.PORT || 5000;
+// Neuer Verify-Endpoint (Demo)
+app.post("/verify", (req, res) => {
+  const { issuer, credentialSubject } = req.body;
+
+  if (issuer && credentialSubject) {
+    res.json({ status: "valid" });
+  } else {
+    res.json({ status: "invalid" });
+  }
+});
+
 app.listen(PORT, () => console.log(`Server läuft auf Port ${PORT}`));
