@@ -48,3 +48,44 @@ npm install
 npm start
 curl -X POST http://localhost:3000/create-did
 { "did": "did:idhub:abc123...", "publicKey": "MCowBQY..." }
+## Verify Endpoint (Demo)
+
+**Route:** `POST /verify`  
+**Beschreibung:**  
+Prüft, ob im JSON-Body die Felder `issuer` und `credentialSubject` vorhanden sind.  
+Dient aktuell **nur zur strukturellen Validierung**, keine echte kryptografische Prüfung.
+
+---
+
+### 🔹 Request (Beispiel)
+
+```json
+{
+  "issuer": "did:idhub:123abc",
+  "credentialSubject": {
+    "name": "Alice"
+  }
+}
+Gültige Eingabe →
+
+{ "status": "valid" }
+
+
+Ungültige Eingabe (Felder fehlen) →
+
+{ "status": "invalid" }
+Server starten
+
+node backend/src/index.js
+
+
+Testaufruf
+
+curl -X POST http://localhost:5000/verify \
+  -H "Content-Type: application/json" \
+  -d '{"issuer":"did:idhub:123abc","credentialSubject":{"name":"Alice"}}'
+
+
+Erwartete Ausgabe
+
+{ "status": "valid" }
