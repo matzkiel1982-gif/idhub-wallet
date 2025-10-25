@@ -1,0 +1,12 @@
+{
+  "name": "idhub-backend",
+  "version": "1.0.0",
+  "description": "Backend service for IDHub DID generation demo",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
