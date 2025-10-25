@@ -63,3 +63,23 @@ if (require.main === module) {
 }
 
 module.exports = app;
+const express = require("express");
+const app = express();
+app.use(express.json());
+
+// ... andere Routen wie /create-did usw.
+
+// ✅ Neuer Verify-Endpoint
+app.post("/verify", (req, res) => {
+  const { issuer, credentialSubject } = req.body;
+
+  if (issuer && credentialSubject) {
+    res.json({ status: "valid" });
+  } else {
+    res.json({ status: "invalid" });
+  }
+});
+
+// Serverstart
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server läuft auf Port ${PORT}`));
